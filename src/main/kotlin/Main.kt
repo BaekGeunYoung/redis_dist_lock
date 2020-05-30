@@ -10,7 +10,7 @@ fun main() {
     val start = System.currentTimeMillis()
     for (i in (0 until 10000)) {
         val lock = redissonClient.getLock("myLock")
-        if (lock.tryLock(100, 1000, TimeUnit.MILLISECONDS)) {
+        if (lock.tryLock(1000, 1000, TimeUnit.MILLISECONDS)) {
             try {
                 val value = redissonClient.getAtomicLong("key")
                 println(value.incrementAndGet())
