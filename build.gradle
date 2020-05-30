@@ -1,5 +1,17 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.60'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'MainKt'
+    }
+
+    // This line of code recursively collects and copies all of a project's files
+    // and adds them to the JAR itself. One can extend this task, to skip certain
+    // files or particular types at will
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 group 'org.geunyoung'
